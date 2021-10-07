@@ -1,0 +1,86 @@
+drop table if exists Departments cascade;
+drop table if exists Department_Employee cascade;
+drop table if exists Department_Manager cascade;
+drop table if exists Employees cascade;
+drop table if exists Salaries cascade;
+drop table if exists Titles cascade;
+
+
+---CREATE TITLES table
+CREATE TABLE Titles (
+    title_id VARCHAR   NOT NULL,
+    title VARCHAR   NOT NULL,
+    CONSTRAINT pk_Titles PRIMARY KEY (
+        title_id
+     )
+);
+
+---CREATE employees table
+CREATE TABLE Employees (
+    emp_no INTEGER   NOT NULL,
+    emp_title_id VARCHAR(5)  NOT NULL,
+    birth_date VARCHAR   NOT NULL,
+    first_name VARCHAR(30)   NOT NULL,
+    last_name VARCHAR(30)   NOT NULL,
+    sex VARCHAR(1)   NOT NULL,
+    hire_date VARCHAR   NOT NULL,
+    CONSTRAINT pk_Employees PRIMARY KEY (
+        emp_no
+     )
+);
+
+---CREATE departments table
+CREATE TABLE Departments (
+    dept_no VARCHAR(5)   NOT NULL,
+    dept_name VARCHAR(30)   NOT NULL,
+    CONSTRAINT pk_Departments PRIMARY KEY (
+        dept_no
+     )
+);
+
+
+---CREATE salaries table
+
+CREATE TABLE Salaries (
+    emp_no INTEGER   NOT NULL,
+    salary INTEGER   NOT NULL,
+    CONSTRAINT pk_Salaries PRIMARY KEY (
+        emp_no
+     )
+);
+
+---CREATE dept_emp table
+
+CREATE TABLE Department_Employee (
+    emp_no INTEGER   NOT NULL,
+    dept_no VARCHAR(5)   NOT NULL,
+    CONSTRAINT pk_Department_Employee PRIMARY KEY (
+        emp_no,dept_no
+     )
+);
+---CREATE DEPT MANAGER table
+
+CREATE TABLE Department_Manager (
+    dept_no VARCHAR(5)   NOT NULL,
+    emp_no INTEGER   NOT NULL,
+    CONSTRAINT pk_Department_Manager PRIMARY KEY (
+        dept_no,emp_no
+     )
+);
+
+SELECT * from department_employee;
+SELECT * from department_manager;
+SELECT * from departments;
+SELECT * from employees;
+SELECT * from salaries;
+SELECT * from titles;
+
+alter table employees
+alter COLUMN birth_date TYPE DATE
+USING to_date(birth_date, 'MM/DD/YYYY');
+
+alter table employees
+alter COLUMN hire_date TYPE DATE
+USING to_date(hire_date, 'MM/DD/YYYY');
+
+SELECT * from employees;
